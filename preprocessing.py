@@ -34,16 +34,3 @@ def normalize_data(images):
         normalized_images.append(normalized_image)
     normalized_images = np.array(normalized_images)
     return normalized_images
-
-
-path = './dataset/training_set/training_set/cats'
-images, labels = load_dataset(path)
-
-# Augment the images
-augmented_images = augment_dataset(images, labels)
-
-# Normalize the augmented images
-normalized_images = normalize_data(augmented_images)
-
-print(normalized_images.shape)
-print(labels.shape)
