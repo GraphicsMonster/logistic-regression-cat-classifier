@@ -32,3 +32,8 @@ def load_dataset(path):
     labels = np.array(labels)
 
     return images, labels
+
+path = './dataset/training_set/training_set/cats'
+images, labels = load_dataset(path)
+print(images.shape)
+print(labels.shape)
