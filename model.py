@@ -12,7 +12,24 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations, learning_rate):
     print("b = " + str(parameters["b"]))
     print("costs = " + str(costs))
 
-    Y_prediction = predict(parameters["w"], parameters["b"], X_test)
+    w = parameters["w"]
+    b = parameters["b"]
 
-    print("test accuracy: {} %".format(100 - np.mean(np.abs(Y_prediction - Y_test)) * 100))
+    Y_test_prediction = predict(w, b, X_test)
+    Y_train_prediction = predict(w, b, X_train)
+
+    print("test accuracy: {} %".format(100 - np.mean(np.abs(Y_test_prediction - Y_test)) * 100))
+    print("train accuracy: {} %".format(100 - np.mean(np.abs(Y_train_prediction - Y_train)) * 100))
+
+
+path = "./dataset/training_set/training_set/cats"
+images, labels = load_dataset(path)
+X_train, Y_train = preprocess(images, labels)
+
+path = "./dataset/test_set/test_set/cats"
+images, labels = load_dataset(path)
+X_test, Y_test = preprocess(images, labels)
+
+model(X_train, Y_train, X_test, Y_test, 1000, 0.005)
+
 

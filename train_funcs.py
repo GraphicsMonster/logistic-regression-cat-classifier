@@ -16,7 +16,7 @@ def propagate(w, b, X, Y):
 
     # forward propagation
     m = X.shape[0]
-    A = sigmoid((np.dot(w, X.T) + b)) # A = y(hat) = probability vector
+    A = sigmoid((np.dot(X, w) + b)) # A = y(hat) = probability vector
 
     # cost function
     cost = (-1/m) * np.sum(Y * np.log(A) + (1-Y) * np.log(1-A)) # mean loss over total number training examples
