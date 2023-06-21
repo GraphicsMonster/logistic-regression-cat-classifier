@@ -4,7 +4,7 @@ def sigmoid(z):
     # returns the sigmoid of z
     return 1.0/(1.0+np.exp(-z))
 
-def initiaze_parameters(dim):
+def initialize_parameters(dim):
     # initialize the parameters W and b
     w = np.zeros((dim, 1))
     b = 0
@@ -43,8 +43,9 @@ def optimize(w, b, X, Y, iterations, learning_rate):
         w = w - learning_rate * dw
         b = b - learning_rate * db
 
-        costs.append(cost)
+        if num % 100 == 0:
+            costs.append(cost)
 
     parameters = {"w": w, "b": b}
-    return parameters, costs[-1]
+    return parameters, costs
         
