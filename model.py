@@ -7,7 +7,7 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations, learning_rate):
 
     w, b = initialize_parameters(X_train.shape[1])
 
-    parameters, costs = optimize(w, b, X_train, Y_train, num_iterations, learning_rate)
+    parameters, costs = optimize(w, b, X_train, Y_train, num_iterations, learning_rate, batch_size=32)
     print("w = " + str(parameters["w"]))
     print("b = " + str(parameters["b"]))
     print("costs = " + str(costs))

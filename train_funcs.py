@@ -30,22 +30,40 @@ def propagate(w, b, X, Y):
     gradients = {"dw": dw, "db": db}
     return gradients, cost
 
-def optimize(w, b, X, Y, iterations, learning_rate):
-
+def optimize(w, b, X, Y, num_iterations, learning_rate, batch_size):
+    m = X.shape[1]
     costs = []
 
-    for num in range(iterations): 
-        gradients, cost = propagate(w, b, X, Y)
+    for i in range(num_iterations):
+        # Randomly shuffle the training examples
+        permutation = np.random.permutation(m)
+        shuffled_X = X[:, permutation]
+        shuffled_Y = Y[:, permutation]
 
-        dw = gradients["dw"]
-        db = gradients["db"]
+        # Divide the dataset into mini-batches
+        num_batches = m // batch_size
+        for j in range(num_batches):
+            # Select the mini-batch
+            start = j * batch_size
+            end = start + batch_size
+            mini_batch_X = shuffled_X[:, start:end]
+            mini_batch_Y = shuffled_Y[:, start:end]
 
-        w = w - learning_rate * dw
-        b = b - learning_rate * db
+            # Perform forward and backward propagation
+            gradients, cost = propagate(w, b, mini_batch_X, mini_batch_Y)
 
-        if num % 100 == 0:
-            costs.append(cost)
+            # Update parameters
+            w = w - learning_rate * gradients["dw"]
+            b = b - learning_rate * gradients["db"]
+
+        # Compute cost and append to the list
+            if i % 100 == 0:
+                costs.append(cost)
+                print("w = " + w)
+                print("b = " + b)
+                print("cost = " + cost)
 
     parameters = {"w": w, "b": b}
     return parameters, costs
+
         
