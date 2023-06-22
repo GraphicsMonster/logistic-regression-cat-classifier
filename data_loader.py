@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import os
 
-def load_dataset(path, num_images=30):
+def load_dataset(path, num_images):
     images = []
     labels = []
     count = 0
