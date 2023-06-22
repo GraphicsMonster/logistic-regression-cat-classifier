@@ -36,5 +36,3 @@ def load_dataset(path, num_images=30):
     return images, labels
 
 # Ok this works
-path = "./dataset/training_set/training_set/cats"
-load_dataset(path, 30)
