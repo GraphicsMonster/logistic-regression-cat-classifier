@@ -41,7 +41,13 @@ def normalize_data(images):
         print("Error: Image shape not supported")
 
     normalized_images = np.array(normalized_images)
+
     return normalized_images
+
+def flatten_images(images):
+
+    flattened_images = images.reshape(images.shape[0], images.shape[1] * images.shape[2] * images.shape[3])
+    return np.array(flattened_images)
 
 def preprocess(images, labels, num_images):
     # This function takes a dataset and returns a new, preprocessed dataset
@@ -53,6 +59,8 @@ def preprocess(images, labels, num_images):
 
     augmented_images, augmented_labels = augment_dataset(images, labels)
     normalized_images = normalize_data(augmented_images)
-    flattened_images = normalized_images.reshape(normalized_images.shape[0], -1)
+    flattened_images = flatten_images(normalized_images)
 
     return flattened_images, augmented_labels
+
+# ok this works too
