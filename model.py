@@ -7,7 +7,7 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations, learning_rate):
 
     w, b = initialize_parameters(X_train.shape[1])
 
-    parameters, costs = optimize(w, b, X_train, Y_train, num_iterations, learning_rate, batch_size=32)
+    parameters, costs = optimize(w, b, X_train, Y_train, num_iterations, learning_rate)
     print("w = " + str(parameters["w"]))
     print("b = " + str(parameters["b"]))
     print("costs = " + str(costs))
@@ -23,12 +23,12 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations, learning_rate):
 
 
 path = "./dataset/training_set/training_set/cats"
-images, labels = load_dataset(path)
-X_train, Y_train = preprocess(images, labels)
+images, labels = load_dataset(path, num_images=50)
+X_train, Y_train = preprocess(images, labels, num_images=30)
 
 path = "./dataset/test_set/test_set/cats"
-images, labels = load_dataset(path)
-X_test, Y_test = preprocess(images, labels)
+images, labels = load_dataset(path, num_images=30)
+X_test, Y_test = preprocess(images, labels, num_images=20)
 
 model(X_train, Y_train, X_test, Y_test, 1000, 0.005)
 

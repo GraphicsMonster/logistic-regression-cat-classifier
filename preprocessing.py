@@ -43,9 +43,16 @@ def normalize_data(images):
     normalized_images = np.array(normalized_images)
     return normalized_images
 
-def preprocess(images, labels):
+def preprocess(images, labels, num_images):
     # This function takes a dataset and returns a new, preprocessed dataset
+    # For now, we are only using a tiny subset of the data since my computer is super old and can't comprehend such computations. Will see later in life how this situation develops.
+    indices = np.random.choice(images.shape[0], num_images, replace=False)
+
+    images = images[indices]
+    labels = labels[indices]
+
     augmented_images, augmented_labels = augment_dataset(images, labels)
     normalized_images = normalize_data(augmented_images)
     flattened_images = normalized_images.reshape(normalized_images.shape[0], -1)
+
     return flattened_images, augmented_labels
