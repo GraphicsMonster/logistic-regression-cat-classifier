@@ -2,15 +2,7 @@ from train_funcs import *
 
 def predict(w, b, X):
 
-    m = X.shape[1]
-    y_hat = np.zeros((1, m))
+    Y_prediction = sigmoid(np.dot(w.T, X.T) + b)
+    Y_prediction = np.where(Y_prediction > 0.5, 1, 0)
 
-    A = sigmoid(np.dot(w.T, X.T) + b)
-
-    for i in range(A.shape[1]):
-        if A[0, i] > 0.5:
-            y_hat[0, i] = 1
-        else:
-            y_hat[0, i] = 0
-
-    return np.squeeze(y_hat)
+    return Y_prediction
