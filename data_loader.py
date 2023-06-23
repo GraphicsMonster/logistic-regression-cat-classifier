@@ -9,7 +9,7 @@ def load_dataset(path, num_images):
 
     for filename in os.listdir(path):
         
-        if count >= num_images:
+        if count > num_images:
             break
 
         elif filename.startswith("cat"):
@@ -29,9 +29,6 @@ def load_dataset(path, num_images):
 
     images = np.array(images)
     labels = np.array(labels)
-    
-    print(images.shape)
-    print(labels.shape)
 
     return images, labels
 

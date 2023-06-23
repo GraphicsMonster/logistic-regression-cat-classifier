@@ -1,6 +1,5 @@
 from tensorflow import image as tf_image
 import numpy as np
-from data_loader import load_dataset
 
 def augment_image(image):
     # This function takes an image and returns a new, augmented image
@@ -49,13 +48,9 @@ def flatten_images(images):
     flattened_images = images.reshape(images.shape[0], images.shape[1] * images.shape[2] * images.shape[3])
     return np.array(flattened_images)
 
-def preprocess(images, labels, num_images):
+def preprocess(images, labels):
     # This function takes a dataset and returns a new, preprocessed dataset
     # For now, we are only using a tiny subset of the data since my computer is super old and can't comprehend such computations. Will see later in life how this situation develops.
-    indices = np.random.choice(images.shape[0], num_images, replace=False)
-
-    images = images[indices]
-    labels = labels[indices]
 
     augmented_images, augmented_labels = augment_dataset(images, labels)
     normalized_images = normalize_data(augmented_images)
