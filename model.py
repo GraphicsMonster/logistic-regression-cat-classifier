@@ -24,7 +24,7 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations, learning_rate):
 
 
 path_training = "./dataset/training_set/training_set/cats"
-X_train, Y_train = load_dataset(path_training, 1000)
+X_train, Y_train = load_dataset(path_training, 500)
 X_train, Y_train = preprocess(X_train, Y_train)
 
 path_testing = "./dataset/test_set/test_set/cats"
