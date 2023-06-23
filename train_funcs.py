@@ -15,8 +15,8 @@ def propagate(w, b, X, Y):
     # w, b = parameters
 
     # forward propagation
-    m = X.shape[0]
-    A = sigmoid((np.dot(X, w) + b)) # A = y(hat) = probability vector
+    m = X.shape[1]
+    A = sigmoid((np.dot(w.T, X.T) + b)) # A = y(hat) = probability vector
 
     # cost function
     cost = (-1/m) * np.sum(Y * np.log(A) + (1-Y) * np.log(1-A)) # mean loss over total number training examples
@@ -30,52 +30,14 @@ def propagate(w, b, X, Y):
     gradients = {"dw": dw, "db": db}
     return gradients, cost
 
-# def optimize(w, b, X, Y, num_iterations, learning_rate, batch_size):
-#     m = X.shape[1]
-#     costs = []
-#     Y = Y.reshape(1, Y.size)
-
-#     for i in range(num_iterations):
-#         # Randomly shuffle the training examples
-#         permutation = np.random.permutation(m)
-#         shuffled_X = X[:, permutation]
-#         shuffled_Y = Y[:, permutation]
-
-#         # Divide the dataset into mini-batches
-#         num_batches = m // batch_size
-#         for j in range(num_batches):
-#             # Select the mini-batch
-#             start = j * batch_size
-#             end = start + batch_size
-#             mini_batch_X = shuffled_X[:, start:end]
-#             mini_batch_Y = shuffled_Y[:, start:end]
-
-#             # Perform forward and backward propagation
-#             gradients, cost = propagate(w, b, mini_batch_X, mini_batch_Y)
-
-#             # Update parameters
-#             w = w - learning_rate * gradients["dw"]
-#             b = b - learning_rate * gradients["db"]
-
-#         # Compute cost and append to the list
-#             if i % 100 == 0:
-#                 costs.append(cost)
-#                 print("w = " + w)
-#                 print("b = " + b)
-#                 print("cost = " + cost)
-
-#     parameters = {"w": w, "b": b}
-#     return parameters, costs
-
-
 def optimize(w, b, X, Y, num_iterations, learning_rate):
 
-    m = X.shape[1]
     costs = []
 
-    gradients, cost = propagate(w, b, X, Y)
-
     for num in range(num_iterations):
+
+        gradients, cost = propagate(w, b, X, Y)
+
         dw = gradients["dw"]
         db = gradients["db"]
 
@@ -85,11 +47,10 @@ def optimize(w, b, X, Y, num_iterations, learning_rate):
         if(num % 10 == 0):
             costs.append(cost)
         
-    print("w = " + str(w))
-    print("b = " + str(b))
-    print("costs = " + str(costs))
-
     parameters = {"w": w, "b": b}
 
     return parameters, costs
+
+# the dataset X being passed should be a 2d array with the row being the number of images and the column being the number of features per image
+# the weight vector w should be a 2d array with the row being the number of features per image and the column being 1
         
